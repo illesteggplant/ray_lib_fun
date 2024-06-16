@@ -1,10 +1,13 @@
 #include "raylib.h"
 
+#define width 800;
+#define height 600;
+
 int main(void)
 {
     // Initialization
-    const int screen_width = 800;
-    const int screen_height = 600;
+    const int screen_width = width;
+    const int screen_height = height;
     InitWindow(screen_width, screen_height, "Snake.  Written by Samuel");
 
     // square defines
