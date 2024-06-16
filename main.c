@@ -13,8 +13,8 @@ int main(void)
     // square defines
     int square_x_coordinate = screen_width / 2 - 50;
     int square_y_coordinate = screen_height / 2 -50;
-    int square_size = 100;
-    Color square_color = BLUE;
+    int square_size = 50;
+    Color square_color = LIME;
 
     // ensure the box does not disappear when moving around the screen
     SetTargetFPS(60); 
@@ -30,7 +30,7 @@ int main(void)
         if (IsKeyDown(KEY_UP)) square_y_coordinate -= 5;
 
         BeginDrawing();
-        ClearBackground(LIME);
+        ClearBackground(BLACK);
         //DrawText("Hello, Raylib! This is Sam Speaking", 0, 0, 30, DARKGRAY);
         DrawRectangle(square_x_coordinate, square_y_coordinate, square_size, square_size, square_color);
 
