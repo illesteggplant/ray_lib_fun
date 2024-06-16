@@ -3,30 +3,33 @@
 int main(void)
 {
     // Initialization
-    const int screenWidth = 800;
-    const int screenHeight = 600;
+    const int screen_width = 800;
+    const int screen_height = 600;
+    InitWindow(screen_width, screen_height, "Snake.  Written by Samuel");
 
-    InitWindow(screenWidth, screenHeight, "Simple Raylib Example");
+    // square defines
+    int square_x_coordinate = screen_width / 2 - 50;
+    int square_y_coordinate = screen_height / 2 -50;
+    int square_size = 100;
+    Color square_color = BLUE;
+
+    // ensure the box does not disappear when moving around the screen
+    SetTargetFPS(60); 
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    // Detect window close button or ESC key
+    while (!WindowShouldClose())    
     {
-        // Update
+        // Detect input and update.  Moves square around the board
+        if (IsKeyDown(KEY_RIGHT)) square_x_coordinate += 5;
+        if (IsKeyDown(KEY_LEFT)) square_x_coordinate -= 5;
+        if (IsKeyDown(KEY_DOWN)) square_y_coordinate += 5;
+        if (IsKeyDown(KEY_UP)) square_y_coordinate -= 5;
 
-        // Draw
         BeginDrawing();
-
         ClearBackground(LIME);
-
-        DrawText("Hello, Raylib! This is Sam Speaking", 0, 0, 30, DARKGRAY);
-
-        // Draw a red circle in the center
-        int centerX = screenWidth / 2;
-        int centerY = screenHeight / 2;
-        int radius = 50;
-        Color color = RED;
-
-        DrawCircle(centerX, centerY, radius, color);
+        //DrawText("Hello, Raylib! This is Sam Speaking", 0, 0, 30, DARKGRAY);
+        DrawRectangle(square_x_coordinate, square_y_coordinate, square_size, square_size, square_color);
 
         EndDrawing();
     }
