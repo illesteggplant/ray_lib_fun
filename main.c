@@ -16,9 +16,17 @@ int main(void)
         // Draw
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(LIME);
 
-        DrawText("Hello, Raylib!", 190, 200, 20, LIGHTGRAY);
+        DrawText("Hello, Raylib! This is Sam Speaking", 0, 0, 30, DARKGRAY);
+
+        // Draw a red circle in the center
+        int centerX = screenWidth / 2;
+        int centerY = screenHeight / 2;
+        int radius = 50;
+        Color color = RED;
+
+        DrawCircle(centerX, centerY, radius, color);
 
         EndDrawing();
     }
