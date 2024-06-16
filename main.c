@@ -31,7 +31,7 @@ int main(void)
 
         BeginDrawing();
         ClearBackground(BLACK);
-        //DrawText("Hello, Raylib! This is Sam Speaking", 0, 0, 30, DARKGRAY);
+        DrawText("Score", 0, 0, 30, LIME);
         DrawRectangle(square_x_coordinate, square_y_coordinate, square_size, square_size, square_color);
 
         EndDrawing();
