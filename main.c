@@ -1,60 +1,60 @@
 #include "raylib.h"
 
-#define width 800;
-#define height 600;
+#define width 800
+#define height 600
 
 int main(void)
 {
     // Initialization
     const int screen_width = width;
     const int screen_height = height;
-    InitWindow(screen_width, screen_height, "Snake.  Written by Samuel");
+    int snake_size = 30;  // Size of the snake's head and the food
+    int food_size = 20;
 
-    // square defines
-    int square_x_coordinate = screen_width / 2 - 50;
-    int square_y_coordinate = screen_height / 2 -50;
-    int square_size = 50;
-    Color square_color = LIME;
+    InitWindow(screen_width, screen_height, "Snake. Written by Samuel");
 
-    // defines for the apples that the snake will eat
-    int x = GetRandomValue(0, screen_width - square_size);
-    int y = GetRandomValue(0, screen_height - square_size);
+    // Snake variables
+    Vector2 snake_position = { screen_width / 2, screen_height / 2 };
+    
+    // Food variables
+    Vector2 food_position;
+    food_position.x = GetRandomValue(0, (screen_width / food_size) - 1) * food_size;
+    food_position.y = GetRandomValue(0, (screen_height / food_size) - 1) * food_size;
 
-    // ensure the box does not disappear when moving around the screen
-    SetTargetFPS(60); 
+    // this is needed to prevent the squares from dissapearing on the screen...
+    SetTargetFPS(60);             
 
-    // Main game loop
-    // Detect window close button or ESC key
-    while (!WindowShouldClose())    
+    while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // Detect input and update.  Moves square around the board
-        if (IsKeyDown(KEY_RIGHT)) square_x_coordinate += 5;
-        if (IsKeyDown(KEY_LEFT)) square_x_coordinate -= 5;
-        if (IsKeyDown(KEY_DOWN)) square_y_coordinate += 5;
-        if (IsKeyDown(KEY_UP)) square_y_coordinate -= 5;
+        // For example purposes, let's move the snake with arrow keys
+        if (IsKeyDown(KEY_RIGHT)) snake_position.x += 10;
+        if (IsKeyDown(KEY_LEFT)) snake_position.x -= 10;
+        if (IsKeyDown(KEY_UP)) snake_position.y -= 10;
+        if (IsKeyDown(KEY_DOWN)) snake_position.y += 10;
 
-        // generate new random values for the apples on the board
-        x = GetRandomValue(0, screen_width - square_size);
-        y = GetRandomValue(0, screen_height - square_size);
-
+        // Check for collision with food
+        if ((snake_position.x == food_position.x) && (snake_position.y == food_position.y))
+        {
+            // Move food to a new random position
+            food_position.x = GetRandomValue(0, (screen_width / food_size) - 1) * food_size;
+            food_position.y = GetRandomValue(0, (screen_height / food_size) - 1) * food_size;
+            snake_size = snake_size + 10;
+        }
 
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        DrawText("Score", 0, 0, 30, LIME);
+        // Draw the snake's head
+        DrawRectangleV(snake_position, (Vector2){snake_size, snake_size}, GREEN);
 
-        DrawRectangle(square_x_coordinate, square_y_coordinate, square_size, square_size, square_color);
-
-
-        DrawRectangle(x, y, square_size, square_size, square_color);
-
+        // Draw the food
+        DrawRectangleV(food_position, (Vector2){food_size, food_size}, RED);
 
         EndDrawing();
     }
 
-    // De-Initialization
-    CloseWindow();        // Close window and OpenGL context
+    CloseWindow();  
 
     return 0;
 }
