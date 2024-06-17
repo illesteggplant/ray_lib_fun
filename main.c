@@ -16,6 +16,10 @@ int main(void)
     int square_size = 50;
     Color square_color = LIME;
 
+    // defines for the apples that the snake will eat
+    int x = GetRandomValue(0, screen_width - square_size);
+    int y = GetRandomValue(0, screen_height - square_size);
+
     // ensure the box does not disappear when moving around the screen
     SetTargetFPS(60); 
 
@@ -29,10 +33,22 @@ int main(void)
         if (IsKeyDown(KEY_DOWN)) square_y_coordinate += 5;
         if (IsKeyDown(KEY_UP)) square_y_coordinate -= 5;
 
+        // generate new random values for the apples on the board
+        x = GetRandomValue(0, screen_width - square_size);
+        y = GetRandomValue(0, screen_height - square_size);
+
+
         BeginDrawing();
+
         ClearBackground(BLACK);
+
         DrawText("Score", 0, 0, 30, LIME);
+
         DrawRectangle(square_x_coordinate, square_y_coordinate, square_size, square_size, square_color);
+
+
+        DrawRectangle(x, y, square_size, square_size, square_color);
+
 
         EndDrawing();
     }
